@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:image_analyzer/colors.dart';
-import 'package:image_analyzer/wait.dart';
 import 'package:image_analyzer/info.dart';
+import 'package:image_picker/image_picker.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -29,19 +31,13 @@ class HomePage extends StatelessWidget {
 
           children: <Widget> [
             imageButton(
-                () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => WaitPage()),
-              ),
+              () => getImage(context, ImageSource.camera),
               'Abrir Cámara',
               Icons.camera_outlined
             ),
             SizedBox(height: 60),
             imageButton(
-              () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => InfoPage()),
-              ),
+              () => getImage(context, ImageSource.gallery),
               'Seleccionar Imagen',
               Icons.insert_photo_outlined
             ),
@@ -79,4 +75,20 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
+  Future getImage(BuildContext context, ImageSource source) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: source);
+
+    File image = File(pickedFile.path);
+    
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          return InfoPage(image: image);
+        }
+      ));
+  }
+
+
 }

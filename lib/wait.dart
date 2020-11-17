@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:image_analyzer/colors.dart';
 
 class WaitPage extends StatelessWidget {
+  final File image;
+  WaitPage({this.image}): super();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,9 +40,14 @@ class WaitPage extends StatelessWidget {
             Stack(
               overflow: Overflow.visible,
               children: [
-                Opacity(
-                    opacity: 0.3,
-                    child: FlutterLogo(size: 500)
+                 Center(
+                  child: Opacity(
+                      opacity: 0.3,
+                      child: Image.file(
+                        image,
+                        height: MediaQuery.of(context).size.height*0.8,
+                      )
+                  ),
                 ),
                 Positioned(
                   width: 50,
