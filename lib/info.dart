@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:image_analyzer/colors.dart';
-import 'package:image_analyzer/home.dart';
-import 'package:image_analyzer/wait.dart';
 
 class InfoPage extends StatefulWidget {
   final File image;
@@ -27,7 +25,7 @@ class _InfoPageState extends State<InfoPage> {
   @override
   void initState(){
     super.initState();
-    _elements = _getData(_image);
+    _loadData();
   }
 
   @override
@@ -43,17 +41,6 @@ class _InfoPageState extends State<InfoPage> {
               child: CustomScrollView(
                 slivers: <Widget>[
                   SliverAppBar(
-                    automaticallyImplyLeading: false,
-                    leading: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                      ),
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
-                      ),
-                    ),
                     title: Center(child: Text('Analyze')),
                     actions: [
                       IconButton(
@@ -112,18 +99,84 @@ class _InfoPageState extends State<InfoPage> {
             ),
           );
         } else if (snapshot.connectionState != ConnectionState.done){
-          return WaitPage(image: _image);
+          return Stack(
+            overflow: Overflow.visible,
+            children: [
+              Center(
+                child: Opacity(
+                  opacity: 0.3,
+                  child: Image.file(_image,)
+                ),
+              ),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    FlatButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text(
+                        'Cancel',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      )
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
         }else {
-          return Text('Ha ocurrido un error');
+          return Stack(
+            overflow: Overflow.visible,
+            children: [
+              Center(
+                child: Opacity(
+                  opacity: 0.3,
+                  child: Image.file(_image,)
+                ),
+              ),
+              Center(
+                child: AlertDialog(
+                  title: Text('Something has gone wrong'),
+                  actions: [
+                    FlatButton(
+                      onPressed: () => _loadData(),
+                      child: Text('Retry')
+                    ),
+                    FlatButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text('Return')
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
         }
       }
     );
   }
 
+  void _loadData() {
+    setState(() {
+      _elements = _getData(_image);
+    });
+  }
+
   Future<List<Map<String, double>>> _getData(File image) async {
 
     http.Response response = await http.post(
-      'https://api.imagga.com/v2/tags',
+      'https://api.imagga.com/v2/tas',
       headers: {HttpHeaders.authorizationHeader:
       "Basic YWNjX2Q4NWI4OTUzYTJlMGQ3Mzo0MTUxZTIzM2U4MzgyYTE1ZjkzMTU2Y2RlODUxNDRiZQ=="},
       body: {
@@ -133,23 +186,15 @@ class _InfoPageState extends State<InfoPage> {
 
     String json = response.body;
 
-    Map data = jsonDecode(json);
+    List data = jsonDecode(json)['result']['tags'];
 
-    return _convert(data['result']['tags']);
-  }
+    List<Map<String,double>> elements = data.map((x) {
+      String elm = x['tag']['en'];
+      double conf = x['confidence'] + .0;
+      return {elm: conf};
+    }).toList();
 
-  List<Map<String, double>> _convert(List data){
-    List<Map<String, double>> toret = new List(data.length);
-    String element;
-    double num;
-
-    for (var i = 0; i<data.length; i++){
-      element = data[i]['tag']['en'];
-      num = data[i]['confidence'] + .0;
-      toret[i] = {element: num};
-    }
-
-    return toret;
+    return elements;
   }
 
   Color getColor(double index){
