@@ -6,6 +6,8 @@ import 'package:image_analyzer/colors.dart';
 import 'package:image_analyzer/output.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'info.dart';
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,11 @@ class HomePage extends StatelessWidget {
               Icons.info_outlined,
               color: Colors.white,
             ),
-            onPressed: null,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>Info()),
+              );}
           )
         ],
       ),
@@ -46,6 +52,8 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
+
 
   Widget imageButton(VoidCallback function, String text, IconData icon){
     return OutlinedButton.icon(
