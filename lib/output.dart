@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:data_connection_checker/data_connection_checker.dart';
 
 import 'package:image_analyzer/colors.dart';
 
@@ -147,7 +148,10 @@ class _OutputPageState extends State<OutputPage> {
               ),
               Center(
                 child: AlertDialog(
-                  title: Text('Something has gone wrong'),
+                  // ignore: unrelated_type_equality_checks
+                  title: DataConnectionChecker().hasConnection == true ?
+                    Text('Something has gone wrong')  :
+                    Text('There is no Internet connection'),
                   actions: [
                     FlatButton(
                       onPressed: () => _loadData(),
@@ -220,4 +224,5 @@ class _OutputPageState extends State<OutputPage> {
       return Color(0xFFFF0000);
     }
   }
+
 }
