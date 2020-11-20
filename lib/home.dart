@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: grafito,
+      backgroundColor: graphite,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text("Image Analyzer"),
@@ -32,13 +32,13 @@ class HomePage extends StatelessWidget {
           children: <Widget> [
             imageButton(
               () => getImage(context, ImageSource.camera),
-              'Abrir Cámara',
+              'Open Camera',
               Icons.camera_outlined
             ),
             SizedBox(height: 60),
             imageButton(
               () => getImage(context, ImageSource.gallery),
-              'Seleccionar Imagen',
+              'Select from Gallery',
               Icons.insert_photo_outlined
             ),
           ],

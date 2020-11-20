@@ -38,7 +38,7 @@ class _OutputPageState extends State<OutputPage> {
           List<Map<String, double>> data = snapshot.data;
           return Scaffold(
             body: Container(
-              color: grafito,
+              color: graphite,
               child: CustomScrollView(
                 slivers: <Widget>[
                   SliverAppBar(
@@ -66,7 +66,7 @@ class _OutputPageState extends State<OutputPage> {
                         padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
                         margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
                         decoration: BoxDecoration(
-                          color: grafito,
+                          color: graphite,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           border: Border.all(
                             color: Colors.white,
