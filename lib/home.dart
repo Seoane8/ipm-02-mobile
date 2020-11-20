@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:image_analyzer/colors.dart';
-import 'package:image_analyzer/info.dart';
+import 'package:image_analyzer/output.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HomePage extends StatelessWidget {
@@ -85,7 +85,7 @@ class HomePage extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return InfoPage(image: image);
+          return OutputPage(image: image);
         }
       ));
   }

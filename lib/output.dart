@@ -6,19 +6,19 @@ import 'package:http/http.dart' as http;
 
 import 'package:image_analyzer/colors.dart';
 
-class InfoPage extends StatefulWidget {
+class OutputPage extends StatefulWidget {
   final File image;
-  InfoPage({this.image}): super();
+  OutputPage({this.image}): super();
 
   @override
-  _InfoPageState createState() => _InfoPageState(image);
+  _OutputPageState createState() => _OutputPageState(image);
 }
 
-class _InfoPageState extends State<InfoPage> {
+class _OutputPageState extends State<OutputPage> {
   File _image;
   Future<List<Map<String, double>>> _elements;
 
-  _InfoPageState(File image){
+  _OutputPageState(File image){
     _image = image;
   }
 
