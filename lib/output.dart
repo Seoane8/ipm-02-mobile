@@ -7,6 +7,8 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 
 import 'package:image_analyzer/colors.dart';
 
+import 'info.dart';
+
 class OutputPage extends StatefulWidget {
   final File image;
   OutputPage({this.image}): super();
@@ -49,7 +51,11 @@ class _OutputPageState extends State<OutputPage> {
                           Icons.info_outlined,
                           color: Colors.white,
                         ),
-                        onPressed: null,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>Info()),
+                          );}
                       ),
                     ],
                     flexibleSpace: Center(
