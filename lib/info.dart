@@ -176,7 +176,7 @@ class _InfoPageState extends State<InfoPage> {
   Future<List<Map<String, double>>> _getData(File image) async {
 
     http.Response response = await http.post(
-      'https://api.imagga.com/v2/tas',
+      'https://api.imagga.com/v2/tags',
       headers: {HttpHeaders.authorizationHeader:
       "Basic YWNjX2Q4NWI4OTUzYTJlMGQ3Mzo0MTUxZTIzM2U4MzgyYTE1ZjkzMTU2Y2RlODUxNDRiZQ=="},
       body: {
