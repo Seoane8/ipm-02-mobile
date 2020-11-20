@@ -57,7 +57,7 @@ class _InfoPageState extends State<InfoPage> {
                     floating: false,
                     pinned: false,
                     collapsedHeight: MediaQuery.of(context).size.height*0.40,
-                    expandedHeight: MediaQuery.of(context).size.height,
+                    expandedHeight: MediaQuery.of(context).size.height*0.8,
                   ),
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
