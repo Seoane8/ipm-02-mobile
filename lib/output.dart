@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_analyzer/error.dart';
+import 'package:image_analyzer/validLandscape.dart';
 import 'package:image_analyzer/wait.dart';
 import 'package:image_analyzer/valid.dart';
 import 'package:image_analyzer/imageModel.dart';
@@ -18,10 +19,16 @@ class OutputPage extends StatelessWidget {
         } else if (model.elements == null){
           return WaitPage();
         }else {
-          return ValidPage();
+          return LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                return constraints.smallest.longestSide > 600 &&
+                    MediaQuery.of(context).orientation == Orientation.landscape
+                ? ValidLandscapePage()
+                : ValidPage();
+              }
+          );
         }
       },
     );
   }
-
 }
