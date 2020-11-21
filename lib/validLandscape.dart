@@ -11,75 +11,73 @@ class ValidLandscapePage extends StatelessWidget{
     return Consumer<ImageModel>(
         builder: (context, model, child) {
           return Scaffold(
-            body: Container(
-                alignment: Alignment.centerRight,
-              color: graphite,
-              child: CustomScrollView(
-                slivers: <Widget>[
-                  SliverAppBar(
-                    title: Center(child: Text('Analyze')),
-                    actions: [
-                      IconButton(
-                          icon: Icon(
-                            Icons.info_outlined,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Info()),
-                            );}
-                      ),
-                    ],
-                    flexibleSpace: Center(
-                      child: Image.file(model.image),
+            backgroundColor: graphite,
+            appBar: AppBar(
+              automaticallyImplyLeading: true,
+              title: Center(child:Text("Analyze")),
+              actions: [
+                IconButton(
+                    icon: Icon(
+                      Icons.info_outlined,
+                      color: Colors.white,
                     ),
-                    floating: false,
-                    pinned: false,
-                    collapsedHeight: MediaQuery.of(context).size.height*0.40,
-                    expandedHeight: MediaQuery.of(context).size.height*0.8,
-                  ),
-                  SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                          (BuildContext context, int index) => Container(
-                        padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
-                        margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                        decoration: BoxDecoration(
-                          color: graphite,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          border: Border.all(
-                            color: Colors.white,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              model.elements[index].keys.first,
-                              style: TextStyle(
-                                fontSize: 25,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text(
-                              model.elements[index].values.first.toStringAsFixed(2) + '%',
-                              style: TextStyle(
-                                fontSize: 25,
-                                color: getColor(model.elements[index].values.first),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      childCount: model.elements.length,
-                    ),
-                  ),
-                ],
-              ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Info()),
+                      );
+                    }
+                )
+              ],
             ),
-          );}
+            body: Row(
+                children: [
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child:
+                    Image.file(model.image)
+                ),
+                  Flexible(
+                    fit: FlexFit.tight,
+                    child:
+                    ListView.builder(itemBuilder: (BuildContext context, int index) => Container(
+                      padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+                      margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                      decoration: BoxDecoration(
+                        color: graphite,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        border: Border.all(
+                          color: Colors.white,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            model.elements[index].keys.first,
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            model.elements[index].values.first.toStringAsFixed(2) + '%',
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: getColor(model.elements[index].values.first),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  ),]
+            ),
+          );
+        }
     );
   }
+
 
   Color getColor(double index){
     if (index >= 90){
