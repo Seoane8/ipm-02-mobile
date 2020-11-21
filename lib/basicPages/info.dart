@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:image_analyzer/colors.dart';
+import 'package:image_analyzer/utils/colors.dart';
 
 class Info extends StatelessWidget {
   @override

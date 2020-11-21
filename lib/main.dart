@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:image_analyzer/home.dart';
-import 'package:image_analyzer/colors.dart';
+import 'package:image_analyzer/basicPages/home.dart';
+import 'package:image_analyzer/utils/colors.dart';
+import 'package:image_analyzer/lanscapePages/homeLandscape.dart';
 import 'package:image_analyzer/imageModel.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +25,14 @@ class MyApp extends StatelessWidget {
           // closer together (more dense) than on mobile platforms.
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: HomePage(),
+        home: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            return constraints.smallest.longestSide > 600 &&
+              MediaQuery.of(context).orientation == Orientation.landscape
+              ? HomeLandscapePage()
+              : HomePage();
+          }
+        )
       ),
     );
   }

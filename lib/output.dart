@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:image_analyzer/error.dart';
-import 'package:image_analyzer/validLandscape.dart';
-import 'package:image_analyzer/wait.dart';
-import 'package:image_analyzer/valid.dart';
+import 'package:image_analyzer/basicPages/error.dart';
+import 'package:image_analyzer/lanscapePages/validLandscape.dart';
+import 'package:image_analyzer/basicPages/wait.dart';
+import 'package:image_analyzer/basicPages/valid.dart';
 import 'package:image_analyzer/imageModel.dart';
 import 'package:provider/provider.dart';
 
