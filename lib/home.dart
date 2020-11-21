@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:image_analyzer/colors.dart';
+import 'package:image_analyzer/imageModel.dart';
 import 'package:image_analyzer/output.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 import 'info.dart';
 
@@ -88,12 +90,13 @@ class HomePage extends StatelessWidget {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: source);
 
-    File image = File(pickedFile.path);
-    
+    Provider.of<ImageModel>(context, listen: false).
+      setImage(File(pickedFile.path));
+
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (BuildContext context) {
-          return OutputPage(image: image);
+          return OutputPage();
         }
       ));
   }
