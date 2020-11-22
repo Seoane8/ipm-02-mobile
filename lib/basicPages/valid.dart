@@ -37,12 +37,23 @@ class ValidPage extends StatelessWidget{
                 collapsedHeight: MediaQuery.of(context).size.height*0.40,
                 expandedHeight: MediaQuery.of(context).size.height*0.8,
               ),
-              SliverList(
+              (MediaQuery.of(context).size.shortestSide > 600) ?
+              SliverGrid(
                 delegate: ElementsList.get(
-                  context,
-                  model.elements
-                )
-              ),
+                    context,
+                    model.elements
+                ),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 7,
+                ),
+              ):
+              SliverList(
+                  delegate: ElementsList.get(
+                      context,
+                      model.elements
+                  )
+              )
             ],
           ),
         ),

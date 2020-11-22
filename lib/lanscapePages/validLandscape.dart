@@ -40,9 +40,17 @@ class ValidLandscapePage extends StatelessWidget{
                 ),
                 Flexible(
                   fit: FlexFit.tight,
-                  child: ListView.custom(
+                  child:(MediaQuery.of(context).size.shortestSide > 600) ?
+                  GridView.custom(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 5,
+                      ),
+                      childrenDelegate: ElementsList.get(context, model.elements),
+                  ) :
+                  ListView.custom(
                     childrenDelegate: ElementsList.get(context, model.elements),
-                  ),
+                  )
                 ),
               ]
             ),
