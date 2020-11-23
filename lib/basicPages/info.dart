@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:image_analyzer/utils/colors.dart';
 
 class Info extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-        backgroundColor: graphite,
         appBar: AppBar(
         centerTitle: true,
         title: Text("Info")),
@@ -22,9 +20,6 @@ class Info extends StatelessWidget {
                 " to scan it.",
             textAlign: TextAlign.left,
             textScaleFactor: 1.5,
-            style: TextStyle(
-                color: Colors.white
-            ),
           ),
         )
 

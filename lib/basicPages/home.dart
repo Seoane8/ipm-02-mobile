@@ -1,32 +1,18 @@
 import 'package:flutter/material.dart';
 
-import 'package:image_analyzer/utils/colors.dart';
+import 'package:image_analyzer/widgets/infoIcon.dart';
 import 'package:image_analyzer/widgets/selectImageButton.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'info.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: graphite,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text("Image Analyzer"),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.info_outlined,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>Info()),
-              );}
-          )
-        ],
+        actions: [InfoIcon()],
       ),
       body: Center(
         child: Column(

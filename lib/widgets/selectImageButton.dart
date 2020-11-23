@@ -17,29 +17,8 @@ class SelectImageButton extends StatelessWidget{
 
     return OutlinedButton.icon(
       onPressed: () => getImage(context, source),
-      icon: Icon(
-        icon,
-        size: 30,
-        color: Colors.white,
-      ),
-      label: Text(
-        text,
-        style: TextStyle(
-          fontSize: 20,
-          color: Colors.white,
-        ),
-      ),
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))
-        ),
-        padding: MaterialStateProperty.all(
-            EdgeInsets.fromLTRB(30, 15, 30, 15)
-        ),
-        side: MaterialStateProperty.all(
-            BorderSide(width: 2, color: Colors.white)
-        ),
-      ),
+      icon: Icon(icon),
+      label: Text(text),
     );
   }
 

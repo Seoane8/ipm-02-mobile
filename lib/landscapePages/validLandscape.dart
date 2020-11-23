@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:image_analyzer/utils/colors.dart';
 import 'package:image_analyzer/widgets/elementsList.dart';
 import 'package:image_analyzer/imageModel.dart';
-import 'package:image_analyzer/basicPages/info.dart';
+import 'package:image_analyzer/widgets/infoIcon.dart';
 import 'package:provider/provider.dart';
 
 class ValidLandscapePage extends StatelessWidget{
@@ -12,24 +11,10 @@ class ValidLandscapePage extends StatelessWidget{
     return Consumer<ImageModel>(
         builder: (context, model, child) {
           return Scaffold(
-            backgroundColor: graphite,
             appBar: AppBar(
-              automaticallyImplyLeading: true,
-              title: Center(child:Text("Analyze")),
-              actions: [
-                IconButton(
-                  icon: Icon(
-                    Icons.info_outlined,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Info()),
-                    );
-                  }
-                )
-              ],
+              centerTitle: true,
+              title: Text("Analyze"),
+              actions: [InfoIcon()],
             ),
             body: Row(
               children: [

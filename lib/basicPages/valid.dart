@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:image_analyzer/utils/colors.dart';
 import 'package:image_analyzer/widgets/elementsList.dart';
 import 'package:image_analyzer/imageModel.dart';
-import 'package:image_analyzer/basicPages/info.dart';
+import 'package:image_analyzer/widgets/infoIcon.dart';
 import 'package:provider/provider.dart';
 
 class ValidPage extends StatelessWidget{
@@ -12,25 +11,11 @@ class ValidPage extends StatelessWidget{
     return Consumer<ImageModel>(
       builder: (context, model, child) {
         return Scaffold(
-        body: Container(
-          color: graphite,
-          child: CustomScrollView(
+          body: CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
                 title: Center(child: Text('Analyze')),
-                actions: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.info_outlined,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Info()),
-                      );}
-                  ),
-                ],
+                actions: [InfoIcon()],
                 flexibleSpace: Center(
                   child: Image.file(model.image),
                 ),
@@ -49,15 +34,15 @@ class ValidPage extends StatelessWidget{
                 ),
               ):
               SliverList(
-                  delegate: ElementsList.get(
-                      context,
-                      model.elements
-                  )
+                delegate: ElementsList.get(
+                  context,
+                  model.elements
+                )
               )
             ],
           ),
-        ),
-      );}
+        );
+      }
     );
   }
 }

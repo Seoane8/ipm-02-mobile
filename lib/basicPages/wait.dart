@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_analyzer/imageModel.dart';
+import 'package:image_analyzer/utils/colors.dart';
 import 'package:provider/provider.dart';
 
 class WaitPage extends StatelessWidget{
@@ -24,7 +25,7 @@ class WaitPage extends StatelessWidget{
                   width: 50,
                   height: 50,
                   child: CircularProgressIndicator(
-                    backgroundColor: Colors.white,
+                    valueColor: AlwaysStoppedAnimation<Color>(white),
                   ),
                 ),
                 SizedBox(height: 30),
@@ -32,11 +33,10 @@ class WaitPage extends StatelessWidget{
                   onPressed: () => Navigator.of(context).pop(),
                   child: Text(
                     'Cancel',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
+                    style: Theme.of(context).textTheme.button.copyWith(
+                      color: white,
                     ),
-                  )
+                  ),
                 ),
               ],
             ),
